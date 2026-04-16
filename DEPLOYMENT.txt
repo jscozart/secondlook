@@ -1,0 +1,17 @@
+Second Look GitHub + Cloudflare Setup
+
+1. Create a public GitHub repo, e.g. `secondlook-site`
+2. Upload `index.html` and `README.md` to the root
+3. GitHub → Settings → Pages
+   - Source: Deploy from a branch
+   - Branch: main
+   - Folder: /(root)
+4. Wait for GitHub Pages URL to appear
+5. In GitHub Pages settings, set custom domain to:
+   secondlook.media
+
+Cloudflare DNS:
+- CNAME   @     yourusername.github.io    DNS only
+- CNAME   www   yourusername.github.io    DNS only
+
+Then wait for GitHub to provision HTTPS and enable Enforce HTTPS.
