@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Second Look</title>
+  <meta name="description" content="Second Look helps publishers maintain control, pricing power, and accountability as media buying shifts to AI agents." />
+  <meta property="og:title" content="Second Look" />
+  <meta property="og:description" content="Business strategy and governance for AI-driven media." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://secondlook.media" />
+  <style>
+    :root { --bg:#f6f4ef; --surface:#fffdf8; --text:#1e1d1a; --muted:#6a665d; --line:#dcd6ca; --accent:#24292f; --accent-2:#8a6d3b; --gold-soft:#efe4cf; --max:1180px; --radius:22px; --shadow:0 10px 30px rgba(0,0,0,.05); }
+    * { box-sizing:border-box; } html { scroll-behavior:smooth; }
+    body { margin:0; font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; color:var(--text); background:linear-gradient(180deg,#faf8f2 0%,var(--bg) 100%); line-height:1.55; }
+    a { color:inherit; text-decoration:none; } .container { width:min(var(--max),calc(100% - 32px)); margin:0 auto; }
+    .site-header { position:sticky; top:0; z-index:100; backdrop-filter:blur(10px); background:rgba(250,248,242,.88); border-bottom:1px solid rgba(220,214,202,.8); }
+    .nav { display:flex; justify-content:space-between; align-items:center; min-height:84px; gap:20px; position:relative; }
+    .brand { display:inline-flex; align-items:center; justify-content:center; width:80px; height:80px; border-radius:999px; position:relative; z-index:101; flex:0 0 auto; }
+    .brand svg { width:64px; height:64px; display:block; }
+    .nav-links { display:flex; gap:20px; align-items:center; flex-wrap:wrap; }
+    .nav-links a { color:var(--muted); font-size:.96rem; } .nav-links a:hover,.nav-links a:focus { color:var(--text); }
+    .menu-toggle { display:none; width:46px; height:46px; border-radius:999px; border:1px solid var(--line); background:rgba(255,253,248,.95); align-items:center; justify-content:center; cursor:pointer; position:relative; z-index:101; }
+    .menu-toggle span,.menu-toggle span::before,.menu-toggle span::after { display:block; width:18px; height:2px; background:var(--text); border-radius:999px; position:relative; transition:.2s ease; content:""; }
+    .menu-toggle span::before { position:absolute; top:-6px; } .menu-toggle span::after { position:absolute; top:6px; }
+    .button { display:inline-flex; align-items:center; justify-content:center; padding:14px 20px; border-radius:999px; border:1px solid var(--accent); background:var(--accent); color:#fff; font-weight:600; transition:.2s ease; }
+    .button:hover { transform:translateY(-1px); } .button.secondary { background:transparent; color:var(--text); border-color:var(--line); }
+    section { padding:88px 0; } .hero { padding:72px 0 48px; }
+    .hero-grid { display:grid; grid-template-columns:1.25fr .9fr; gap:28px; align-items:stretch; }
+    .hero-panel,.card,.feature-card,.blog-card,.contact-card { background:var(--surface); border:1px solid var(--line); border-radius:var(--radius); box-shadow:var(--shadow); }
+    .hero-panel { padding:54px; } .eyebrow { display:inline-block; margin-bottom:18px; padding:8px 12px; border-radius:999px; background:var(--gold-soft); color:var(--accent-2); font-size:.82rem; font-weight:600; letter-spacing:.01em; }
+    h1,h2,h3 { margin:0 0 14px; letter-spacing:-.04em; line-height:1.02; } h1 { font-size:clamp(2.8rem,6vw,5.4rem); } h2 { font-size:clamp(2rem,4vw,3rem); } h3 { font-size:1.25rem; }
+    p.lead { font-size:1.16rem; color:var(--muted); max-width:720px; margin:0 0 24px; }
+    .hero-actions { display:flex; gap:12px; flex-wrap:wrap; margin-top:28px; } .hero-side { display:grid; gap:20px; } .mini-panel { padding:28px; }
+    .mini-panel p,.copy,.muted,.feature-card p,.card p,.blog-card p,.contact-card p { color:var(--muted); }
+    .stats { display:grid; gap:14px; } .stat { padding:20px 22px; border-top:1px solid var(--line); } .stat:first-child { border-top:none; padding-top:0; }
+    .stat strong { display:block; font-size:1.8rem; letter-spacing:-.03em; margin-bottom:4px; color:var(--text); }
+    .section-head { display:grid; grid-template-columns:.9fr 1.1fr; gap:28px; align-items:start; margin-bottom:28px; }
+    .kicker { color:var(--accent-2); font-size:.9rem; font-weight:700; text-transform:uppercase; letter-spacing:.08em; margin-bottom:10px; }
+    .grid-3 { display:grid; grid-template-columns:repeat(3,1fr); gap:22px; } .grid-2 { display:grid; grid-template-columns:repeat(2,1fr); gap:22px; }
+    .feature-card,.card,.blog-card,.contact-card { padding:28px; }
+    ul.clean { margin:16px 0 0; padding-left:18px; color:var(--muted); } ul.clean li { margin:8px 0; }
+    .engagement { display:grid; gap:8px; } .label { font-size:.8rem; text-transform:uppercase; letter-spacing:.08em; color:var(--accent-2); font-weight:700; }
+    .blog-card.featured { padding:36px; display:grid; gap:14px; }
+    .featured-engagement { border:1.5px solid #b4935c; box-shadow:0 14px 34px rgba(138,109,59,.12); }
+    .featured-engagement .label { color:#6f5428; }
+    .about-strip { display:flex; flex-wrap:wrap; gap:12px; margin-top:18px; }
+    .pill { padding:10px 14px; border:1px solid var(--line); border-radius:999px; background:#faf7f0; color:var(--muted); font-size:.92rem; }
+    .contact-wrap { display:grid; grid-template-columns:1fr .95fr; gap:24px; align-items:start; }
+    .contact-card form { display:grid; gap:14px; }
+    input,textarea { width:100%; border-radius:16px; border:1px solid var(--line); background:#fffdf9; padding:14px 16px; font:inherit; color:var(--text); }
+    textarea { min-height:140px; resize:vertical; }
+    .site-footer { padding:28px 0 48px; color:var(--muted); font-size:.94rem; }
+    .footer-inner { display:flex; justify-content:space-between; align-items:center; gap:18px; flex-wrap:wrap; }
+    .footer-brand { display:inline-flex; align-items:center; gap:12px; } .footer-brand svg { width:48px; height:48px; display:block; flex:0 0 auto; }
+    @media (min-width:981px) { .featured-engagement { grid-column: span 2; } }
+    @media (max-width:980px) {
+      .hero-grid,.section-head,.grid-3,.grid-2,.contact-wrap { grid-template-columns:1fr; }
+      .hero-panel { padding:34px; }
+      .nav { padding:12px 0; align-items:center; min-height:76px; }
+      .nav-links { gap:14px; }
+      .brand { width:72px; height:72px; }
+      .brand svg { width:56px; height:56px; }
+    }
+    @media (max-width:640px) {
+      section { padding:70px 0; } .hero { padding-top:40px; } .hero-panel,.feature-card,.card,.blog-card,.contact-card,.mini-panel { padding:22px; } h1 { line-height:1.04; } .button { width:100%; } .hero-actions { flex-direction:column; }
+      .menu-toggle { display:inline-flex; }
+      .brand { width:64px; height:64px; }
+      .brand svg { width:50px; height:50px; }
+      .nav-links { display:none; position:absolute; top:calc(100% + 10px); right:0; left:0; flex-direction:column; align-items:stretch; gap:0; padding:10px; background:rgba(255,253,248,.98); border:1px solid var(--line); border-radius:20px; box-shadow:var(--shadow); }
+      .nav-links a { padding:14px 16px; border-radius:14px; color:var(--text); } .nav-links a:hover,.nav-links a:focus { background:#f4efe4; }
+      .nav-links.is-open { display:flex; } .footer-inner { align-items:flex-start; }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container nav">
+      <a href="#home" class="brand" aria-label="Second Look home" title="Second Look">
+        <svg viewBox="0 0 64 64" aria-hidden="true">
+          <circle cx="27" cy="27" r="17" fill="none" stroke="#8a6d3b" stroke-width="4"></circle>
+          <path d="M39.5 39.5L53 53" stroke="#1e1d1a" stroke-width="5" stroke-linecap="round"></path>
+          <rect x="19" y="19" width="16" height="12" rx="4" fill="none" stroke="#1e1d1a" stroke-width="3"></rect>
+          <circle cx="24" cy="25" r="1.8" fill="#8a6d3b"></circle>
+          <circle cx="30" cy="25" r="1.8" fill="#8a6d3b"></circle>
+          <path d="M22 31c1.6 2 3.6 3 5.8 3 2.1 0 4-1 5.2-2.8" fill="none" stroke="#1e1d1a" stroke-width="2.2" stroke-linecap="round"></path>
+          <path d="M27 16v-4" stroke="#8a6d3b" stroke-width="2.4" stroke-linecap="round"></path>
+        </svg>
+      </a>
+      <button class="menu-toggle" type="button" aria-label="Open navigation" aria-expanded="false" aria-controls="primary-nav"><span></span></button>
+      <nav class="nav-links" id="primary-nav" aria-label="Primary">
+        <a href="#what-we-do">What We Do</a>
+        <a href="#engagements">Engagements</a>
+        <a href="#insights">Insights</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+  <main>
+    <section class="hero" id="home">
+      <div class="container hero-grid">
+        <div class="hero-panel">
+          <span class="eyebrow">Second Look</span>
+          <h1>Helping publishers maintain control as media buying shifts to AI agents</h1>
+          <p class="lead">Second Look helps publishers maintain control, pricing power, and accountability as media buying shifts to autonomous systems.</p><p class="lead" style="font-size:1rem; margin-top:-6px; max-width:620px;">Early decisions will shape long-term control.</p>
+          <div class="hero-actions">
+            <a class="button" href="https://calendly.com/jscozart" target="_blank" rel="noopener noreferrer">Start a Conversation</a>
+            <a class="button secondary" href="#what-we-do">View Our Approach</a>
+          </div>
+        </div>
+        <div class="hero-side">
+          <div class="hero-panel mini-panel">
+            <div class="kicker">Why now</div>
+            <h3>The shift is coming faster than most publishers are prepared for</h3>
+            <p>Programmatic scaled faster than the accountability structures built to govern it. Agentic advertising risks doing the same thing again, this time with systems that can negotiate, optimize, and execute decisions at machine speed.</p>
+            <p>The standards are emerging. The commercial and governance work is still yours.</p>
+          </div>
+          <div class="hero-panel mini-panel stats">
+            <div class="stat"><strong>Readiness</strong><span>Prepare before agent behavior becomes a pricing or compliance problem.</span></div>
+            <div class="stat"><strong>Revenue</strong><span>Protect premium positioning, negotiated value, and commercial leverage.</span></div>
+            <div class="stat"><strong>Governance</strong><span>Build practical guardrails around targeting, adjacency, escalation, and auditability.</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section id="what-we-do">
+      <div class="container">
+        <div class="section-head">
+          <div><div class="kicker">What We Do</div><h2>Maintain control, pricing power, and accountability in AI-driven media</h2></div>
+          <div><p class="lead">Second Look helps publishers navigate the business, operational, and governance challenges created by autonomous advertising systems before they become revenue, relationship, or compliance problems.</p></div>
+        </div>
+        <div class="grid-3">
+          <article class="feature-card"><h3>Establish accountability before something goes wrong</h3><p>When agent behavior affects pricing, content adjacency, user targeting, or campaign execution, publishers need clarity on ownership, escalation, and auditability before the market forces the issue.</p></article>
+          <article class="feature-card"><h3>Buyer relationship protection</h3><p>We help publishers identify where agent-driven buying could weaken premium positioning, erode deal value, or reduce the influence of direct commercial relationships.</p></article>
+          <article class="feature-card"><h3>AI operational readiness</h3><p>We help organizations prepare for agent-driven workflows by clarifying what signals matter, what inventory should remain protected, where human oversight still needs to sit, and how commercial, operations, and legal teams should coordinate.</p></article>
+        </div>
+      </div>
+    </section>
+    <section id="engagements">
+      <div class="container">
+        <div class="section-head">
+          <div><div class="kicker">Engagements</div><h2>How we work</h2></div>
+          <div><p class="lead">Second Look offers focused advisory engagements designed for organizations that want to prepare thoughtfully, move early, and stay in control.</p></div>
+        </div>
+        <div class="grid-3">
+          <article class="card engagement featured-engagement">
+            <div class="label">Recommended starting point</div><h3>Agent Readiness Assessment</h3>
+            <p><strong>Best for:</strong> Publishers who want a clear view of where they may be exposed as agent-driven buying grows.</p>
+            <p><strong>What’s included:</strong></p>
+            <ul class="clean"><li>Stakeholder interviews</li><li>Review of current commercial and operational posture</li><li>Signal and inventory exposure assessment</li><li>Governance and accountability gap analysis</li><li>Concise findings readout with recommended priorities</li></ul>
+            <p><strong>Outcome:</strong> A practical view of what needs attention now, what can wait, and where control is most likely to erode first.</p>
+          </article>
+          <article class="card engagement">
+            <div class="label">Design</div><h3>Control and Governance Design</h3>
+            <p><strong>Best for:</strong> Organizations ready to define how revenue, operations, legal, and policy should work together in an AI-driven media environment.</p>
+            <p><strong>What’s included:</strong></p>
+            <ul class="clean"><li>Pricing control and decision rights: defining where and how you retain pricing authority and deal-making decisions as buying becomes automated</li><li>Configuration documentation and version control framework</li><li>Escalation and accountability framework</li><li>Brand adjacency and targeting guardrail planning</li><li>Audit and verification framework</li><li>Executive briefing and operating recommendations</li></ul>
+            <p><strong>Outcome:</strong> A working blueprint for how your organization will protect value and make decisions as autonomous systems scale.</p>
+          </article>
+          <article class="card engagement">
+            <div class="label">Advisory</div><h3>Ongoing Advisory</h3>
+            <p><strong>Best for:</strong> Leadership teams that want independent perspective as standards evolve, internal decisions arise, and market behavior shifts.</p>
+            <p><strong>What’s included:</strong></p>
+            <ul class="clean"><li>Monthly or quarterly advisory sessions</li><li>Issue-based guidance on emerging questions</li><li>Review of internal plans, partner proposals, and governance decisions</li><li>Executive sounding board support</li></ul>
+            <p><strong>Outcome:</strong> A trusted outside perspective to help leadership teams stay ahead of a fast-moving transition.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+    <section id="insights">
+      <div class="container">
+        <div class="section-head">
+          <div><div class="kicker">Insights</div><h2>Analysis and commentary</h2></div>
+          <div><p class="lead">Perspectives on agentic advertising, publisher control, and accountability structures in AI-driven media.</p></div>
+        </div>
+        <article class="blog-card featured"><div class="label">Featured insight</div><h3>Agentic Advertising Is Coming. Are Publishers Ready?</h3><p>The foundational paper behind Second Look will be published here. Until then, schedule a conversation for early access and context tailored to your organization.</p><div><a class="button secondary" href="https://calendly.com/jscozart" target="_blank" rel="noopener noreferrer">Request the Paper</a></div></article>
+      </div>
+    </section>
+    <section id="about">
+      <div class="container">
+        <div class="section-head">
+          <div><div class="kicker">About</div><h2>Building accountability structures for AI-driven media</h2></div>
+          <div><p class="lead">Jesse Cozart founded Second Look to help publishers navigate one of the next major shifts in digital advertising: the move from human-mediated buying to AI agents that can negotiate, optimize, and execute decisions at machine speed.</p></div>
+        </div>
+        <div class="grid-2">
+          <article class="card"><p>Jesse Cozart has spent more than two decades in digital advertising and media technology, with leadership experience across major platforms and infrastructure companies including DoubleClick, Google, AppNexus, Microsoft, LiveRamp, and Mediaocean.</p><p>Over that time, he saw firsthand how this industry often scales technology faster than it builds the commercial and governance structures needed to manage the consequences. Agentic advertising presents a similar inflection point, but publishers still have an opportunity to prepare earlier and more deliberately.</p><p>Second Look exists to help them do that.</p><div class="about-strip"><span class="pill">DoubleClick</span><span class="pill">Google</span><span class="pill">AppNexus</span><span class="pill">Microsoft</span><span class="pill">LiveRamp</span><span class="pill">Mediaocean</span></div></article>
+          <article class="card"><h3>Why Second Look</h3><p>The most important questions in agent-driven media are not only technical. They are commercial, operational, and organizational.</p><ul class="clean"><li>How is value communicated to systems that optimize differently than people do?</li><li>Who is accountable when something goes wrong?</li><li>What requires human judgment, and what should be configured in advance?</li></ul><p>Second Look helps leadership teams work through those questions with rigor and clarity.</p></article>
+        </div>
+      </div>
+    </section>
+    <section id="contact">
+      <div class="container contact-wrap">
+        <div><div class="kicker">Contact</div><h2>Start the conversation</h2><p class="lead">If your organization is starting to think through the business, operational, or governance implications of agent-driven advertising, Jesse Cozart would be glad to talk.</p><p class="muted">Second Look works with publishers and media organizations preparing for the shift to AI-driven buying systems.</p></div>
+        <div class="contact-card"><form><input type="text" placeholder="Name" aria-label="Name" /><input type="text" placeholder="Company" aria-label="Company" /><input type="text" placeholder="Title" aria-label="Title" /><input type="email" placeholder="Email" aria-label="Email" /><textarea placeholder="What are you thinking about?" aria-label="What are you thinking about?"></textarea><a class="button" href="https://calendly.com/jscozart" target="_blank" rel="noopener noreferrer">Schedule a Conversation</a></form></div>
+      </div>
+    </section>
+  </main>
+  <footer class="site-footer">
+    <div class="container footer-inner"><div class="footer-brand">
+      <svg viewBox="0 0 64 64" aria-hidden="true"><circle cx="27" cy="27" r="17" fill="none" stroke="#8a6d3b" stroke-width="4"></circle><path d="M39.5 39.5L53 53" stroke="#1e1d1a" stroke-width="5" stroke-linecap="round"></path><rect x="19" y="19" width="16" height="12" rx="4" fill="none" stroke="#1e1d1a" stroke-width="3"></rect><circle cx="24" cy="25" r="1.8" fill="#8a6d3b"></circle><circle cx="30" cy="25" r="1.8" fill="#8a6d3b"></circle><path d="M22 31c1.6 2 3.6 3 5.8 3 2.1 0 4-1 5.2-2.8" fill="none" stroke="#1e1d1a" stroke-width="2.2" stroke-linecap="round"></path><path d="M27 16v-4" stroke="#8a6d3b" stroke-width="2.4" stroke-linecap="round"></path></svg>
+      <span>Second Look helps publishers maintain control, pricing power, and accountability as media buying shifts to autonomous systems.</span>
+    </div></div>
+  </footer>
+  <script>
+    const menuToggle = document.querySelector('.menu-toggle');
+    const navLinks = document.querySelector('.nav-links');
+    if (menuToggle && navLinks) {
+      menuToggle.addEventListener('click', () => {
+        const isOpen = navLinks.classList.toggle('is-open');
+        menuToggle.setAttribute('aria-expanded', String(isOpen));
+      });
+      navLinks.querySelectorAll('a').forEach((link) => {
+        link.addEventListener('click', () => {
+          navLinks.classList.remove('is-open');
+          menuToggle.setAttribute('aria-expanded', 'false');
+        });
+      });
+    }
+  </script>
+</body>
+</html>
